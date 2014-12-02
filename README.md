@@ -1,4 +1,4 @@
-# CoLIn
+# colin
 
 Command Line Interface.
 
