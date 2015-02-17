@@ -23,6 +23,13 @@ module Colin
       inspect
     end
 
+    def named_options(opts=[])
+      opts.each do |opt|
+        break if @skipped.empty?
+        set(opt.to_s, @skipped.shift)
+      end
+    end
+    
     private
 
     def parse
