@@ -1,12 +1,55 @@
-# colin
+# CoLIn
 
-Command Line Interface.
-
-Nothing to see here yet
+**Co**mmand **L**ine **In**terface.
 
 ## Usage
 
-TODO: Write usage instructions here
+Colin's main focus is to parse command line arguments, but it's not constrained by it.
+
+You can parse any array and get an options hash back.
+
+To parse an array, just pass it as the only argument to `Colin::Parser#new`.
+
+Let's see an example:
+
+```ruby
+  require "colin"
+  
+  args = %w[first --name=Federico --age 100 second -y 2015 -f -nnumber]
+  
+  cli = Colin::Parser.new(args)
+  
+  cli.options
+  # => {:name=>"Federico", :age=>100, :y=>2015, :f=>true, :n=>"number"}
+  
+  cli.args
+  # => ["first", "second"]
+```
+
+If you want to assign names to the remaining arguments, you can call the `#named_options` method.
+
+It receives an array with the names for the remaining options and it removes as many remaining options as elements there are on the array.
+
+```ruby
+  require "colin"
+  
+  args = %w[first --name=Federico --age 100 second -y 2015 -f -nnumber third]
+  
+  cli = Colin::Parser.new(args)
+  cli.named_options([:do, :dont])
+  
+  cli.options
+  # => {:name=>"Federico",
+  #     :age=>100,
+  #     :y=>2015,
+  #     :f=>true,
+  #     :n=>"number",
+  #     :do=>"first",
+  #     :dont=>"second"}
+  
+  cli.args
+  # => ["third"]
+```
 
 ## Installation
 
