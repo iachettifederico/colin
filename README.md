@@ -35,8 +35,7 @@ It receives an array with the names for the remaining options and it removes as 
   
   args = %w[first --name=Federico --age 100 second -y 2015 -f -nnumber third]
   
-  cli = Colin::Parser.new(args)
-  cli.named_options([:do, :dont])
+  cli = Colin::Parser.new(args).named_options([:do, :dont])
   
   cli.options
   # => {:name=>"Federico",

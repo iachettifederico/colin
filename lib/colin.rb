@@ -28,6 +28,7 @@ module Colin
         break if @skipped.empty?
         set(opt.to_s, @skipped.shift)
       end
+      self
     end
     
     private
