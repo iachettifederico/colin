@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+$:.unshift(File.expand_path("../../lib", __FILE__))
+
+require "colin"
+
+require "pp"
+cli = Colin::Parser.new(ARGV)
+
+puts "# Options:"
+pp cli.options
+puts
+puts "# Remaining arguments:"
+pp cli.args
+
