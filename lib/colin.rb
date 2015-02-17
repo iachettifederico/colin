@@ -15,6 +15,14 @@ module Colin
       @skipped
     end
 
+    def inspect
+      "<#{self.class} options: #{options.inspect} args: #{args.inspect}>"
+    end
+
+    def to_s
+      inspect
+    end
+
     private
 
     def parse
