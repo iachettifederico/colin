@@ -36,7 +36,7 @@ module Colin
     def parse
       (@args + [nil]).each do |opt|
         case opt
-        when /^\w+$/
+        when /^[\w\/]+$/
           if @current
             set(@current, opt)
           else
