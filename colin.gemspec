@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["iachetti.federico@gmail.com"]
   spec.summary       = %q{COmmand Line INterface.}
   spec.description   = %q{COmmand Line INterface.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/iachettifederico/colin"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
