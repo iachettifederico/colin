@@ -69,7 +69,7 @@ module Colin
     end
 
     def set(key, value)
-      @options[key.to_sym] = sanitize(value)
+      @options[key.gsub("-", "_").to_sym] = sanitize(value)
       @current = nil if @current
     end
 
