@@ -44,10 +44,10 @@ module Colin
           end
         when /^--([\w-]+)$/
           keep($1)
-        when /^--([\w-]+)=([\w\s]+)$/
+        when /^--([\w-]+)=([\w\s\/]+)$/
           consume_current
           set($1, $2)
-        when /^-(\w)(\w+)$/
+        when /^-(\w)([\w\/]+)$/
           consume_current
           set($1, $2)
         when /^-(\w)$/
