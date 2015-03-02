@@ -36,7 +36,7 @@ module Colin
     def parse
       (@args + [nil]).each do |opt|
         case opt
-        when /^[\w\/]+$/
+        when /^[\w\/\.]+$/
           if @current
             set(@current, opt)
           else
@@ -44,7 +44,7 @@ module Colin
           end
         when /^--([\w-]+)$/
           keep($1)
-        when /^--([\w-]+)=([\w\s\/]+)$/
+        when /^--([\w-]+)=([\w\s\/\.]+)$/
           consume_current
           set($1, $2)
         when /^-(\w)([\w\/]+)$/
@@ -64,7 +64,9 @@ module Colin
     def sanitize(value)
       return true   if value == "true"
       return false  if value == "false"
+      return nil    if value == "nil" || value == "null"
       return value.to_i if value =~ /^\d+$/
+      return value.to_f if value =~ /^\d+\.\d+$/
       value
     end
 
