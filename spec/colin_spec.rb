@@ -96,9 +96,37 @@ scope Colin::Parser do
       end
     end
 
+    scope "#named_options" do
+      scope "one" do
+        let(:parser) { Parser( %w[hello --name NAME] ).named_options(:greeting) }
+        spec { parser.options == {name: "NAME", greeting: "hello"} }
+        spec { parser.args == [] }
+      end
+
+      scope "many" do
+        scope "exact" do
+          let(:parser) { Parser( %w[hello --name NAME water] ).named_options(:greeting, :liquid) }
+          spec { parser.options == {name: "NAME", greeting: "hello", liquid: "water"} }
+          spec { parser.args == [] }
+        end
+
+        scope "more args than names" do
+          let(:parser) { Parser( %w[hello --name NAME water] ).named_options(:greeting) }
+          spec { parser.options == {name: "NAME", greeting: "hello"} }
+          spec { parser.args == ["water"] }
+        end
+
+        scope "more names than args" do
+          let(:parser) { Parser( %w[hello --name NAME] ).named_options(:greeting, :liquid) }
+          spec { parser.options == {name: "NAME", greeting: "hello"} }
+          spec { parser.args == [] }
+        end
+      end
+    end
+
     scope "combination" do
       let(:parser) { Parser( %w[some_file.rb -nNAME --age=34 -n 90 random_string --other_number 70] ) }
-      spec { parser.options == {n: "NAME", age: 34, n: 90, other_number: 70} }
+      spec { parser.options == { n: "NAME", age: 34, n: 90, other_number: 70 } }
       spec { parser.args == %w[some_file.rb random_string] }
     end
   end
